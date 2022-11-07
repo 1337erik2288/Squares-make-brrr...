@@ -7,12 +7,15 @@ namespace WinFormsApp1
         //MyRectangle myRect;
         List<BaseObject> objects = new();
         Player player;
+        Marker marker;
         public Form1()
         {
             InitializeComponent();
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
+            marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
 
+            objects.Add(marker);
             objects.Add(player);
 
             objects.Add(new MyRectangle(50, 50, 0));
@@ -38,6 +41,21 @@ namespace WinFormsApp1
             //g.FillRectangle(new SolidBrush(Color.White),0, 0, pbMain.Width, pbMain.Height);
 
             //myRect.Render(g);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            float dx = marker.x - player.x;
+            float dy = marker.y - player.y;
+
+            float length = MathF.Sqrt(dx * dx + dy * dy);
+            dx /= length;
+            dy /= length;
+
+            player.x += dx * 2;
+            player.y += dy * 2;
+
+            pbMain.Invalidate();
         }
     }
 }
