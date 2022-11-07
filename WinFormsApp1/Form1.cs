@@ -30,8 +30,19 @@ namespace WinFormsApp1
             g.Clear(Color.White);
 
             
-            foreach(var obj in objects)
+            foreach(var obj in objects.ToList())
             {
+                if (obj != player && player.OverLaps(obj, g))
+                {
+                    txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Игрок пересекся с {obj}\n"+ txtLog.Text;  
+                    
+                    if (obj == marker)
+                    {
+                        objects.Remove(marker);
+                        marker = null;
+                    }
+                }
+
                 g.Transform = obj.GetTransform();
                 obj.Render(g);
             }
@@ -45,17 +56,32 @@ namespace WinFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            float dx = marker.x - player.x;
-            float dy = marker.y - player.y;
+            if (marker != null)
+            {
+                float dx = marker.x - player.x;
+                float dy = marker.y - player.y;
 
-            float length = MathF.Sqrt(dx * dx + dy * dy);
-            dx /= length;
-            dy /= length;
+                float length = MathF.Sqrt(dx * dx + dy * dy);
+                dx /= length;
+                dy /= length;
 
-            player.x += dx * 2;
-            player.y += dy * 2;
+                player.x += dx * 2;
+                player.y += dy * 2;
+            }
+            
 
             pbMain.Invalidate();
+        }
+
+        private void pbMain_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (marker == null)
+            {
+                marker = new Marker(0, 0, 0);
+                objects.Add(marker);
+            }
+            marker.x = e.X;
+            marker.y = e.Y;
         }
     }
 }
