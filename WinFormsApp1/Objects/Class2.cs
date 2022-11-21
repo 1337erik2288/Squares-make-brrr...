@@ -14,8 +14,7 @@ namespace WinFormsApp1.Objects
         }
         public override void Render(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(Color.Green), -25, -15, 50, 30);
-            g.DrawRectangle(new Pen(Color.Red), -25, -15, 50, 30);
+            
         }
     }
 }

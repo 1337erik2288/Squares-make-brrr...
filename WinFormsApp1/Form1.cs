@@ -13,6 +13,16 @@ namespace WinFormsApp1
             InitializeComponent();
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
+
+            player.OnOverlap += (p, obj) =>
+            {
+                txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Игрок пересекся с {obj}\n" + txtLog.Text;
+            };
+            player.OnMarkerOverlap += (m) =>
+            {
+                objects.Remove(m);
+                marker = null;
+            };
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
 
             objects.Add(marker);
@@ -29,22 +39,24 @@ namespace WinFormsApp1
 
             g.Clear(Color.White);
 
+            updatePlayer();
             
             foreach(var obj in objects.ToList())
             {
                 if (obj != player && player.OverLaps(obj, g))
                 {
-                    txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Игрок пересекся с {obj}\n"+ txtLog.Text;  
+                    player.Overlap(obj);
+                    obj.Overlap(player);
                     
-                    if (obj == marker)
-                    {
-                        objects.Remove(marker);
-                        marker = null;
-                    }
+                    
                 }
 
-                g.Transform = obj.GetTransform();
-                obj.Render(g);
+                foreach (var ovj in objects)
+                {
+                    g.Transform = obj.GetTransform();
+                    obj.Render(g);
+                }
+                
             }
 
             //g.Transform = myRect.GetTransform();
@@ -53,8 +65,7 @@ namespace WinFormsApp1
 
             //myRect.Render(g);
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
+        private void updatePlayer()
         {
             if (marker != null)
             {
@@ -65,11 +76,23 @@ namespace WinFormsApp1
                 dx /= length;
                 dy /= length;
 
-                player.x += dx * 2;
-                player.y += dy * 2;
-            }
-            
+                player.vX += dx * 0.5f;
+                player.vY += dy * 0.5f;
 
+                player.Angle = 90 - MathF.Atan2(player.vX, player.vY) * 180 / MathF.PI;
+            }
+
+            player.vX += -player.vX * 0.1f;
+            player.vY += -player.vY * 0.1f;
+
+            player.x += player.vX;
+            player.y += player.vY;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            updatePlayer();
+ 
             pbMain.Invalidate();
         }
 

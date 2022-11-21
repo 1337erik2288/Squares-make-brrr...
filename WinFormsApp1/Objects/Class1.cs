@@ -13,6 +13,7 @@ namespace WinFormsApp1.Objects
         public float x;
         public float y;
         public float Angle;
+        public Action<BaseObject, BaseObject> OnOverlap;
         public BaseObject(float x, float y, float angle)
         {
             this.x = x;
@@ -43,9 +44,16 @@ namespace WinFormsApp1.Objects
             path1.Transform(this.GetTransform());
             path2.Transform(obj.GetTransform());
 
-            var region = new Region(path2);
+            var region = new Region(path1);
             region.Intersect(path2);
             return !region.IsEmpty(g);
+        }
+        public virtual void Overlap(BaseObject obj)
+        {
+            if (this.OnOverlap != null)
+            {
+                this.OnOverlap(this, obj);  
+            }
         }
     }
 }

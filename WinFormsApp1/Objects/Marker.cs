@@ -21,9 +21,10 @@ namespace WinFormsApp1.Objects
         }
         public override GraphicsPath GetGraphicsPath()
         {
-            var path = new GraphicsPath();
+            var path = base.GetGraphicsPath();
             path.AddEllipse(-3, -3, 6, 6);
             return path;
         }
+        
     }
 }
