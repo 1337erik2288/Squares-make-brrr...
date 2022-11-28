@@ -14,7 +14,7 @@ namespace WinFormsApp1.Objects
         }
         public override void Render(Graphics g)
         {
-
+            g.FillEllipse(new SolidBrush(Color.Green), -10, -10, 20, 20);
         }
     }
 }

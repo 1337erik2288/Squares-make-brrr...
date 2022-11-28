@@ -8,12 +8,22 @@ namespace WinFormsApp1
         List<BaseObject> objects = new();
         Player player;
         Marker marker;
+        GreenCircle greenCircle;
 
         public Form1()
         {
             InitializeComponent();
 
+            Random rnd = new Random();
+
+            var randomX = rnd.Next(0, pbMain.Width);
+            var randomY = rnd.Next(0, pbMain.Height);
+
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
+
+            greenCircle = new GreenCircle(randomX, randomY, 0);
+
+            objects.Add(greenCircle);
 
             player.OnOverlap += (p, obj) =>
             {
