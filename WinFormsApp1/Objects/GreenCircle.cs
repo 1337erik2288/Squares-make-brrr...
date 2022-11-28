@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp1.Objects
 {
-    class MyRectangle : BaseObject
+    class GreenCircle : BaseObject
     {
-        public MyRectangle(float x, float y, float angle) : base(x, y, angle)
+        public GreenCircle(float x, float y, float angle) : base(x, y, angle)
         {
-            // lfkmit <juf ytn///
+
         }
         public override void Render(Graphics g)
         {
-            
+
         }
     }
 }
