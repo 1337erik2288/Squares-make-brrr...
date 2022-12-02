@@ -1,3 +1,4 @@
+using System.Diagnostics.Metrics;
 using WinFormsApp1.Objects;
 
 namespace WinFormsApp1
@@ -8,7 +9,8 @@ namespace WinFormsApp1
         List<BaseObject> objects = new();
         Player player;
         Marker marker;
-        GreenCircle greenCircle;
+        GreenCircle greenCircle1;
+        GreenCircle greenCircle2;
 
         public Form1()
         {
@@ -21,9 +23,11 @@ namespace WinFormsApp1
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
 
-            greenCircle = new GreenCircle(randomX, randomY, 0);
+            greenCircle1 = new GreenCircle(randomX, randomY, 0);
+            greenCircle2 = new GreenCircle(randomX, randomY, 0);
 
-            objects.Add(greenCircle);
+            objects.Add(greenCircle1);
+            objects.Add(greenCircle2);
 
             player.OnOverlap += (p, obj) =>
             {
@@ -34,13 +38,33 @@ namespace WinFormsApp1
                 objects.Remove(m);
                 marker = null;
             };
+            player.OnGreenCircleOverlap += (m) =>
+            {
+                var rnd = new Random();
+                var randomX = rnd.Next(0, pbMain.Width);
+                var randomY = rnd.Next(0, pbMain.Height);
+
+                objects.Remove(m);
+
+                if (m == greenCircle1)
+                {
+                    greenCircle1 = new GreenCircle(randomX, randomY, 0);
+                    objects.Add(greenCircle1);
+                }
+                else
+                {
+                    greenCircle2 = new GreenCircle(randomX, randomY, 0);
+                    objects.Add(greenCircle2);
+                }
+
+                
+            };
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
 
             objects.Add(marker);
             objects.Add(player);
 
-            objects.Add(new MyRectangle(50, 50, 0));
-            objects.Add(new MyRectangle(100, 100, 45));
+            
         }
 
         private void pbMain_Paint(object sender, PaintEventArgs e)
@@ -110,6 +134,16 @@ namespace WinFormsApp1
             }
             marker.x = e.X;
             marker.y = e.Y;
+        }
+
+        private void pbMain_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

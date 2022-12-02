@@ -10,7 +10,7 @@ namespace WinFormsApp1.Objects
     {
         public MyRectangle(float x, float y, float angle) : base(x, y, angle)
         {
-            // lfkmit <juf ytn///
+            // Дальше Бога нет...
         }
         public override void Render(Graphics g)
         {

@@ -32,6 +32,7 @@
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.txtLog = new System.Windows.Forms.RichTextBox();
+            this.PointC = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,6 +43,7 @@
             this.pbMain.Size = new System.Drawing.Size(743, 459);
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
+            this.pbMain.Click += new System.EventHandler(this.pbMain_Click);
             this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pbMain_Paint);
             this.pbMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbMain_MouseClick);
             // 
@@ -59,17 +61,29 @@
             this.txtLog.TabIndex = 1;
             this.txtLog.Text = "";
             // 
+            // PointC
+            // 
+            this.PointC.AutoSize = true;
+            this.PointC.Location = new System.Drawing.Point(673, 9);
+            this.PointC.Name = "PointC";
+            this.PointC.Size = new System.Drawing.Size(59, 25);
+            this.PointC.TabIndex = 2;
+            this.PointC.Text = "label1";
+            this.PointC.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1030, 460);
+            this.Controls.Add(this.PointC);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.pbMain);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -78,5 +92,6 @@
         private PictureBox pbMain;
         private System.Windows.Forms.Timer timer1;
         private RichTextBox txtLog;
+        private Label PointC;
     }
 }
