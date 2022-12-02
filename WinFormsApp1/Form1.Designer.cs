@@ -64,11 +64,11 @@
             // PointC
             // 
             this.PointC.AutoSize = true;
-            this.PointC.Location = new System.Drawing.Point(673, 9);
+            this.PointC.Location = new System.Drawing.Point(661, 9);
             this.PointC.Name = "PointC";
-            this.PointC.Size = new System.Drawing.Size(59, 25);
+            this.PointC.Size = new System.Drawing.Size(74, 25);
             this.PointC.TabIndex = 2;
-            this.PointC.Text = "label1";
+            this.PointC.Text = "Очки: 0";
             this.PointC.Click += new System.EventHandler(this.label1_Click);
             // 
             // Form1

@@ -11,6 +11,7 @@ namespace WinFormsApp1
         Marker marker;
         GreenCircle greenCircle1;
         GreenCircle greenCircle2;
+        int points = 0;
 
         public Form1()
         {
@@ -57,7 +58,11 @@ namespace WinFormsApp1
                     objects.Add(greenCircle2);
                 }
 
-                
+                points++;
+
+                PointC.Text = $" Очки: {points}";
+
+
             };
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
 
