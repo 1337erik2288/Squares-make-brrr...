@@ -12,20 +12,24 @@ namespace WinFormsApp1
         GreenCircle greenCircle1;
         GreenCircle greenCircle2;
         int points = 0;
+        Random rnd = new Random();
 
         public Form1()
         {
             InitializeComponent();
 
-            Random rnd = new Random();
+            
 
             var randomX = rnd.Next(0, pbMain.Width);
             var randomY = rnd.Next(0, pbMain.Height);
+            var randomX2 = rnd.Next(0, pbMain.Width);
+            var randomY2 = rnd.Next(0, pbMain.Height);
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0);
 
             greenCircle1 = new GreenCircle(randomX, randomY, 0);
-            greenCircle2 = new GreenCircle(randomX, randomY, 0);
+            greenCircle2 = new GreenCircle(randomX2, randomY2, 0);
+            updatePoints();
 
             objects.Add(greenCircle1);
             objects.Add(greenCircle2);
@@ -41,7 +45,7 @@ namespace WinFormsApp1
             };
             player.OnGreenCircleOverlap += (m) =>
             {
-                var rnd = new Random();
+                
                 var randomX = rnd.Next(0, pbMain.Width);
                 var randomY = rnd.Next(0, pbMain.Height);
 
@@ -148,6 +152,20 @@ namespace WinFormsApp1
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+       
+        public void updatePoints()
+        {
+
+            greenCircle1.deathGreenCircle += onPointDeath;
+            greenCircle2.deathGreenCircle += onPointDeath;
+
+        }
+        private void onPointDeath(GreenCircle m)
+        {
+            m.x = rnd.Next(30, Width - 30); 
+            m.y = rnd.Next(30, Height - 30);  
 
         }
     }
