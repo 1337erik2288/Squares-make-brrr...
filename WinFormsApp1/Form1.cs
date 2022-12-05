@@ -51,21 +51,14 @@ namespace WinFormsApp1
 
                 objects.Remove(m);
 
-                if (m == greenCircle1)
-                {
-                    greenCircle1 = new GreenCircle(randomX, randomY, 0);
-                    objects.Add(greenCircle1);
-                }
-                else
-                {
-                    greenCircle2 = new GreenCircle(randomX, randomY, 0);
-                    objects.Add(greenCircle2);
-                }
+                var circle = new GreenCircle(randomX, randomY, 0);
+                circle.deathGreenCircle += onPointDeath;
+                objects.Add(circle);
 
                 points++;
 
                 PointC.Text = $" Очки: {points}";
-                updatePoints();
+                
 
             };
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
