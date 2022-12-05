@@ -10,7 +10,7 @@ namespace WinFormsApp1.Objects
 {
     class GreenCircle : BaseObject
     {
-        public float r = 36;
+        public float r = 50;
         public Action<GreenCircle> deathGreenCircle;
         public Action<GreenCircle> Action;
 
@@ -20,18 +20,18 @@ namespace WinFormsApp1.Objects
         }
         public override void Render(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(Color.Green), -18, -18, r, r);
+            g.FillEllipse(new SolidBrush(Color.Green), -(r/2), -(r/2), r, r);
             this.r -= (float)0.1;
             if (r <= 0)
             {
-                r = 36;
+                r = 50;
                 deathGreenCircle(this);
             }
         }
         public override GraphicsPath GetGraphicsPath()
         {
             var path = base.GetGraphicsPath();
-            path.AddEllipse(-18, -18, 36, 36);
+            path.AddEllipse(-(r / 2), -(r / 2), r, r);
             return path;
         }
     }

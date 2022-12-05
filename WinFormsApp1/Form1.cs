@@ -65,7 +65,7 @@ namespace WinFormsApp1
                 points++;
 
                 PointC.Text = $" Очки: {points}";
-
+                updatePoints();
 
             };
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
